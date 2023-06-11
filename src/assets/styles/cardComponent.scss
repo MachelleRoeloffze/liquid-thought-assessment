@@ -1,0 +1,52 @@
+.card {
+  border: 0;
+}
+
+.game-card {
+  width: 216px;
+  height: 330.19px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.card-front {
+  background-image: url('../images/card.svg');
+  background-size: cover;
+}
+
+.game-card .card-front,
+.game-card .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transition: transform 0.3s;
+}
+
+.game-card .card-front {
+  display: flex;
+  transform: rotateY(0deg);
+}
+
+.game-card .card-back {
+  background-color: #cccccc;
+  transform: rotateY(180deg);
+}
+
+.game-card.flipped .card-front {
+  transform: rotateY(180deg);
+}
+
+.game-card.flipped .card-back {
+  transform: rotateY(0deg);
+}
+
+.game-card.matched .card-front,
+.game-card.matched .card-back {
+  visibility: hidden;
+}
+
+.matched {
+  display: none;
+}

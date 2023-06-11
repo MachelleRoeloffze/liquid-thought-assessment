@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Poppins&display=swap');
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  font-family: Poppins;
+  background-image: url('../src/assets/images/img-bg-desktop.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 2rem;
+}
