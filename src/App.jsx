@@ -29,7 +29,7 @@ const App = () => {
           </div>
         </div>
       </div>
-      <div className='container'>
+      <div className=''>
         <Form />
       </div>
     </div>
