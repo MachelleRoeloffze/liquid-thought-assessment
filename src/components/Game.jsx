@@ -1,10 +1,19 @@
-import { useState, useEffect } from 'react';
-import Lottie from 'lottie-web';
+import React, { useState, useEffect } from 'react';
+import Lottie from 'lottie-react-web';
+import "../assets/styles/cardComponent.scss";
 import animation1 from '../assets/lottie/glasses.json';
 import animation2 from '../assets/lottie/onesie.json';
 import animation3 from '../assets/lottie/pants.json';
 import animation4 from '../assets/lottie/shoe.json';
 import animation5 from '../assets/lottie/shorts.json';
+
+const animations = [
+  { name: 'glasses', animation: animation1 },
+  { name: 'onesie', animation: animation2 },
+  { name: 'pants', animation: animation3 },
+  { name: 'shoe', animation: animation4 },
+  { name: 'shorts', animation: animation5 },
+];
 
 const shuffleArray = (array) => {
   const newArray = [...array];
@@ -16,16 +25,9 @@ const shuffleArray = (array) => {
 };
 
 const generateInitialCards = () => {
-  const animations = [
-    animation1,
-    animation2,
-    animation3,
-    animation4,
-    animation5,
-  ];
-  const cards = animations.flatMap((animation) => [
-    { id: animation.name + '1', animation, isFlipped: false, isMatched: false },
-    { id: animation.name + '2', animation, isFlipped: false, isMatched: false },
+  const cards = animations.flatMap((animation, index) => [
+    { id: `card${index + 1}a`, animation: animation.animation, isFlipped: false, isMatched: false },
+    { id: `card${index + 1}b`, animation: animation.animation, isFlipped: false, isMatched: false },
   ]);
   return shuffleArray(cards);
 };
@@ -76,6 +78,8 @@ const Game = () => {
             : card
         );
         setMatchedCards((prev) => [...prev, card1, card2]);
+      } else {
+        handleUnmatchedCards(card1, card2);
       }
     }
 
@@ -113,8 +117,6 @@ const Game = () => {
       } else {
         handleUnmatchedCards(card1, card2);
       }
-
-      setMoves((prev) => prev + 1);
     }
   }, [flippedCards]);
 
@@ -124,40 +126,45 @@ const Game = () => {
     setMatchedCards([]);
     setMoves(0);
     setFlippedCards([]);
-
-    setTimeout(() => {
-      const updatedCards = initialCards.map((card) => ({
+  
+    setCards((prevCards) => {
+      const updatedCards = prevCards.map((card) => ({
         ...card,
         isFlipped: false,
       }));
-      setCards(updatedCards);
-    }, 500);
+      return updatedCards;
+    });
   };
-
+  
   const renderCards = () => {
     const chunkSize = 5;
     const rows = [];
-
+  
     for (let i = 0; i < cards.length; i += chunkSize) {
       const chunk = cards.slice(i, i + chunkSize);
       const row = (
-        <div key={i} className='flex mb-4'>
+        <div key={i} className='card-row'>
           {chunk.map((card) => (
             <div key={card.id} className='game-card'>
               <div
-                className={`w-40 h-40 game-card-inner ${
+                className={`game-card-inner ${
                   card.isFlipped ? 'flipped' : ''
                 } ${card.isMatched ? 'matched' : ''}`}
                 onClick={() => handleCardClick(card.id)}
               >
                 {card.isFlipped || card.isMatched ? (
                   <Lottie
-                    animationData={card.animation}
-                    loop={false}
-                    autoplay={card.isMatched}
+                    options={{
+                      loop: false,
+                      autoplay: card.isMatched,
+                      animationData: card.animation,
+                    }}
                   />
                 ) : (
-                  <div className='card-back'></div>
+                  <>
+                    <div className='card-front'></div>
+                    <div className='card-back'></div>
+                  </>
                 )}
               </div>
             </div>
@@ -166,16 +173,17 @@ const Game = () => {
       );
       rows.push(row);
     }
-
-    return <div className=''>{rows}</div>;
+  
+    return <div className='card-grid'>{rows}</div>;
   };
-
+  
   return (
     <div className='container mx-auto'>
+      <div className='mb-4'>
+        <button onClick={restartGame}>Restart Game</button>
+        <span>Moves: {moves}</span>
+      </div>
       {renderCards()}
-      <button className='' onClick={restartGame}>
-        Restart
-      </button>
     </div>
   );
 };

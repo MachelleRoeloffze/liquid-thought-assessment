@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import '../assets/styles/cardComponent.scss';
+import PropTypes from "prop-types";
+import "../assets/styles/cardComponent.scss";
 
-const GameCard = ({ id, value, isFlipped, isMatched, onClick }) => {
+const GameCard = ({ id, isFlipped, isMatched, onClick, animation }) => {
   const handleClick = () => {
     if (!isMatched && !isFlipped) {
       onClick(id);
@@ -9,23 +9,37 @@ const GameCard = ({ id, value, isFlipped, isMatched, onClick }) => {
   };
 
   return (
-    <div
-      className={`game-card ${isFlipped ? 'flipped' : ''} ${
-        isMatched ? 'matched' : ''
-      }`}
-      onClick={handleClick}
-    >
-      <div className='card-body'>
-        <div className='card-front'></div>
-        <div className='card-back'>{value}</div>
+    <div className="game-card">
+      <div
+        className={`game-card-inner ${isFlipped ? "flipped" : ""} ${
+          isMatched ? "matched" : ""
+        }`}
+        onClick={handleClick}
+      >
+        {isFlipped || isMatched ? (
+          <div className="animation-container">
+            <Lottie
+              options={{
+                loop: false,
+                autoplay: isMatched,
+                animationData: animation,
+              }}
+            />
+          </div>
+        ) : (
+          <>
+            <div className="card-front"></div>
+            <div className="card-back"></div>
+          </>
+        )}
       </div>
     </div>
   );
 };
 
+
 GameCard.propTypes = {
   id: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
   isFlipped: PropTypes.bool,
   isMatched: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
