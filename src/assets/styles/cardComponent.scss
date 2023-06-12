@@ -1,5 +1,3 @@
-
-
 .game-card {
   width: 160px;
   height: 222.19px;
@@ -24,44 +22,35 @@
   backface-visibility: hidden;
 }
 
-.game-card.flipped .game-card-inner {
-  transform: rotateY(180deg);
-}
-
-
 .card-front {
-  background-image: url("../images/card.svg");
+  background-image: url('../images/card.svg');
   background-size: cover;
   width: 157px;
   height: 240px;
 }
 
-.card-back {
-  background-color: #cccccc;
+.game-card-inner {
+  background-color: #fff;
   transform: rotateY(180deg);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 240px;
-  width: 157px;
+  height: 222px;
+  width: 145px;
   border-radius: 24px;
-  background-color: #ffffff;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 }
 
-.game-card.flipped .card-body {
+.card-row {
+  display: inline-flex;
+}
+.game-card .flipped {
   transform: rotateY(180deg);
 }
 
 .game-card.matched .card-front,
 .game-card.matched .card-back {
   visibility: hidden;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .restart-button {

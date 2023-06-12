@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'lottie-react-web';
-import "../assets/styles/cardComponent.scss";
+import '../assets/styles/cardComponent.scss';
 import animation1 from '../assets/lottie/glasses.json';
 import animation2 from '../assets/lottie/onesie.json';
 import animation3 from '../assets/lottie/pants.json';
@@ -26,8 +26,18 @@ const shuffleArray = (array) => {
 
 const generateInitialCards = () => {
   const cards = animations.flatMap((animation, index) => [
-    { id: `card${index + 1}a`, animation: animation.animation, isFlipped: false, isMatched: false },
-    { id: `card${index + 1}b`, animation: animation.animation, isFlipped: false, isMatched: false },
+    {
+      id: `card${index + 1}a`,
+      animation: animation.animation,
+      isFlipped: false,
+      isMatched: false,
+    },
+    {
+      id: `card${index + 1}b`,
+      animation: animation.animation,
+      isFlipped: false,
+      isMatched: false,
+    },
   ]);
   return shuffleArray(cards);
 };
@@ -126,7 +136,7 @@ const Game = () => {
     setMatchedCards([]);
     setMoves(0);
     setFlippedCards([]);
-  
+
     setCards((prevCards) => {
       const updatedCards = prevCards.map((card) => ({
         ...card,
@@ -135,16 +145,15 @@ const Game = () => {
       return updatedCards;
     });
   };
-  
+
   const renderCards = () => {
-    const chunkSize = 5;
-    const rows = [];
-  
-    for (let i = 0; i < cards.length; i += chunkSize) {
-      const chunk = cards.slice(i, i + chunkSize);
-      const row = (
-        <div key={i} className='card-row'>
-          {chunk.map((card) => (
+    const firstRow = cards.slice(0, 5);
+    const secondRow = cards.slice(5, 10);
+
+    return (
+      <div className='card-container'>
+        <div className='card-row'>
+          {firstRow.map((card) => (
             <div key={card.id} className='game-card'>
               <div
                 className={`game-card-inner ${
@@ -170,20 +179,44 @@ const Game = () => {
             </div>
           ))}
         </div>
-      );
-      rows.push(row);
-    }
-  
-    return <div className='card-grid'>{rows}</div>;
+        <div className='card-row'>
+          {secondRow.map((card) => (
+            <div key={card.id} className='game-card'>
+              <div
+                className={`game-card-inner ${
+                  card.isFlipped ? 'flipped' : ''
+                } ${card.isMatched ? 'matched' : ''}`}
+                onClick={() => handleCardClick(card.id)}
+              >
+                {card.isFlipped || card.isMatched ? (
+                  <Lottie
+                    options={{
+                      loop: false,
+                      autoplay: card.isMatched,
+                      animationData: card.animation,
+                    }}
+                  />
+                ) : (
+                  <>
+                    <div className='card-front'></div>
+                    <div className='card-back'></div>
+                  </>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
-  
+
   return (
-    <div className='container mx-auto'>
-      <div className='mb-4'>
+    <div className='legend'>
+      <div>
+        {renderCards()}
         <button onClick={restartGame}>Restart Game</button>
         <span>Moves: {moves}</span>
       </div>
-      {renderCards()}
     </div>
   );
 };

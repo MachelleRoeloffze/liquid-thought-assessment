@@ -1,4 +1,4 @@
-.form-flex-container {
+.form {
   background-color: #ffffff;
   padding: 32px 40px;
   display: flex;
@@ -6,37 +6,34 @@
   justify-content: space-between;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  width:100%;
+  margin-top: 60px;
 }
 
 .form-paragraph-one {
   height: 48px;
-  width: 50%;
+  width: 60%;
   color: #000000;
   font-size: 22px;
   font-weight: bold;
-  letter-spacing: 0;
   line-height: 24px;
 }
 
 .form-paragraph-two {
-  height: 23px;
-  width: 90%;
   color: #000000;
   font-size: 16px;
-  letter-spacing: 0;
   line-height: 17px;
+  margin-bottom: 0;
 }
 
 input[type='text'],
 input[type='email'] {
-  height: 40px;
-  width: 90%;
+  height: 23px;
+  width: calc(100% - 36px); /* Decrease the width to accommodate checkboxes */
   border-radius: 16.46px;
   background-color: #efeeeb;
   padding: 12px 20px;
-  margin: 8px 0;
-  border:0;
+  margin: 0 8px 15px 0;
+  border: 0;
 }
 
 input[type='email']:last-of-type {
@@ -47,7 +44,6 @@ input::placeholder {
   color: #000000;
   font-family: Poppins;
   font-size: 16px;
-  letter-spacing: 0;
   line-height: 17px;
 }
 
@@ -58,18 +54,20 @@ input:focus {
 
 .checkbox-text {
   height: 18px;
-  width: 160px;
   color: #000000;
   font-size: 14px;
-  letter-spacing: 0;
-  line-height: 18px;
-  display: inline-block;
+  margin-left: 8px;
+  display: flex;
+  justify-content: center;
 }
 
 .custom-checkbox {
   display: flex;
-  align-items: center;
-  margin-top: 20px;
+  align-items: flex-start; /* Update this line to align with the name input */
+}
+
+.custom-checkbox:first-child {
+  margin-bottom: 10px; /* Add bottom margin to the first checkbox */
 }
 
 .custom-checkbox input[type='checkbox'] {
@@ -83,6 +81,7 @@ input:focus {
   height: 28px;
   background-color: #efeeeb;
   border-radius: 8px;
+  margin-right: 8px;
 }
 
 .custom-checkbox .checkmark::after {
@@ -110,7 +109,9 @@ input:focus {
 }
 
 .btn-container,
-.checkbox-container {
+.checkbox-container,
+.input-container,
+orm-paragraph-two {
   align-self: flex-end;
   margin-top: auto;
 }
@@ -119,21 +120,20 @@ input:focus {
   height: 48px;
   width: 148px;
   border-radius: 16px;
-  background-color: #52B1B3;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.25);
+  background-color: #52b1b3;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
   text-align: center;
   align-self: flex-end;
   margin-top: auto;
-  border:0;
+  border: 0;
   bottom: 0;
 }
 
 .btn-text {
-  color: #FFFFFF;
+  color: #ffffff;
   font-family: Poppins;
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: 0;
   line-height: 20px;
 }
 

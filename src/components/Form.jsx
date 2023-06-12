@@ -19,35 +19,28 @@ const Form = () => {
 
   return (
     <form onSubmit={handleSubmit} className=''>
-      <div className='form-flex-container'>
+      <div className='form'>
         <div>
-          <p className='form-paragraph-one mb-8'>
-            Bee informed when we launch.
-          </p>
+          <p className='form-paragraph-one'>Bee informed when we launch.</p>
           <p className='form-paragraph-two'>
             Drop your deets and we’ll give you a buzz.
           </p>
         </div>
-        <div className=''>
-          <div className=''>
-            <input
-              type='text'
-              value={name}
-              placeholder='Name'
-              onChange={(e) => setName(e.target.value)}
-              className=''
-            />
-          </div>
-
-          <div className=''>
-            <input
-              type='email'
-              value={email}
-              placeholder='Email'
-              onChange={(e) => setEmail(e.target.value)}
-              className=''
-            />
-          </div>
+        <div className='input-container'>
+          <input
+            type='text'
+            value={name}
+            placeholder='Name'
+            onChange={(e) => setName(e.target.value)}
+            className=''
+          />
+          <input
+            type='email'
+            value={email}
+            placeholder='Email'
+            onChange={(e) => setEmail(e.target.value)}
+            className=''
+          />
         </div>
         <div className='checkbox-container'>
           <div className='custom-checkbox'>
@@ -60,7 +53,6 @@ const Form = () => {
 
             <label className='checkbox-text'>Count me in as a seller</label>
           </div>
-
           <div className='custom-checkbox'>
             <input
               type='checkbox'
@@ -71,7 +63,6 @@ const Form = () => {
             <label className='checkbox-text'>Count me in as a buyer</label>
           </div>
         </div>
-
         <div className='btn-container'>
           <button type='submit' className='submit-btn btn-text'>
             Sign me up
