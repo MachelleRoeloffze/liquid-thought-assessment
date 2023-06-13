@@ -1,0 +1,23 @@
+.input {
+  box-sizing: border-box;
+  font-size: 16px;
+  height: 42px;
+  width: 399px;
+  border-radius: 12px;
+  background-color: #efeeeb;
+  border: 0;
+
+  &[type="text"],
+  &[type="email"] {
+    padding-left: 20px;
+    outline: none;
+  }
+
+  &.input-error {
+    border: 2px solid #e22e37;
+  }
+
+  &::placeholder {
+    color: #000000;
+  }
+}

@@ -1,0 +1,28 @@
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    margin-right:8px;
+  }
+  
+  .custom-checkbox__input {
+    display: none;
+  }
+  
+  .custom-checkbox__icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    background-color: #EFEEEB;
+    cursor: pointer;
+  }
+  
+  .custom-checkbox__icon--checked {
+    background-image: url('/src/assets/images/icon-tick.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
+  .custom-checkbox__label {
+    margin-left: 8px;
+  }
+  

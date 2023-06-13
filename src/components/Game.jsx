@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import Lottie from 'lottie-react-web';
-import '../assets/styles/cardComponent.scss';
-import animation1 from '../assets/lottie/glasses.json';
-import animation2 from '../assets/lottie/onesie.json';
-import animation3 from '../assets/lottie/pants.json';
-import animation4 from '../assets/lottie/shoe.json';
-import animation5 from '../assets/lottie/shorts.json';
+import '../assets/styles/components/card.scss';
+import glassesAnimation from '../assets/lottie/glasses.json';
+import onesieAnimation from '../assets/lottie/onesie.json';
+import pantsAnimation from '../assets/lottie/pants.json';
+import shoeAnimation from '../assets/lottie/shoe.json';
+import shortsAnimation from '../assets/lottie/shorts.json';
 
 const animations = [
-  { name: 'glasses', animation: animation1 },
-  { name: 'onesie', animation: animation2 },
-  { name: 'pants', animation: animation3 },
-  { name: 'shoe', animation: animation4 },
-  { name: 'shorts', animation: animation5 },
+  { name: 'glasses', animation: glassesAnimation },
+  { name: 'onesie', animation: onesieAnimation },
+  { name: 'pants', animation: pantsAnimation },
+  { name: 'shoe', animation: shoeAnimation },
+  { name: 'shorts', animation: shortsAnimation },
 ];
 
 const shuffleArray = (array) => {
@@ -130,22 +130,6 @@ const Game = () => {
     }
   }, [flippedCards]);
 
-  const restartGame = () => {
-    const initialCards = generateInitialCards();
-    setCards(initialCards);
-    setMatchedCards([]);
-    setMoves(0);
-    setFlippedCards([]);
-
-    setCards((prevCards) => {
-      const updatedCards = prevCards.map((card) => ({
-        ...card,
-        isFlipped: false,
-      }));
-      return updatedCards;
-    });
-  };
-
   const renderCards = () => {
     const firstRow = cards.slice(0, 5);
     const secondRow = cards.slice(5, 10);
@@ -214,7 +198,6 @@ const Game = () => {
     <div className='legend'>
       <div>
         {renderCards()}
-        <button onClick={restartGame}>Restart Game</button>
         <span>Moves: {moves}</span>
       </div>
     </div>

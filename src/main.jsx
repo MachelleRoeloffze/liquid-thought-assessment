@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './assets/styles/index.scss';
-import './assets/styles/App.scss';
-// import './assets/styles/reset.scss';
+import './assets/styles/app.scss';
+
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
