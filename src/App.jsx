@@ -2,7 +2,7 @@ import React from "react";
 import Game from "./components/Game";
 import Form from "./components/Form";
 import imgBee from "./assets/images/img-bee.svg";
-import imgArrow from "./assets/images/img-top-dotted-line.svg";
+
 
 const App = () => {
   const mainText = "Mix & match the tiles to reveal a surprise!";
@@ -17,14 +17,13 @@ const App = () => {
         <div className="container__left">
           <Game />
         </div>
-        <div className="container__right-paragraph-two mobile-show desktop-hide">
+        <div className="container__right-paragraph-two desktop-hide mobile-show">
             <h2 dangerouslySetInnerHTML={{ __html: paragraphTwo }} />
           </div>
         <div className="container__right">
           <div className="container__right-text">{mainText}</div>
-          {/* <div className="container__right-image-one">
-            <img src={imgArrow} alt="arrow" />
-          </div> */}
+         <div className="container__right-image-one">
+          </div> 
           <div className="container__right-image-two">
             <img src={imgBee} alt="Bee" />
           </div>
