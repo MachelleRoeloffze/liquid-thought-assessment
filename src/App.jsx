@@ -17,6 +17,9 @@ const App = () => {
         <div className="container__left">
           <Game />
         </div>
+        <div className="container__right-paragraph-two mobile-show desktop-hide">
+            <h2 dangerouslySetInnerHTML={{ __html: paragraphTwo }} />
+          </div>
         <div className="container__right">
           <div className="container__right-text">{mainText}</div>
           {/* <div className="container__right-image-one">
@@ -28,7 +31,7 @@ const App = () => {
           <div className="container__right-paragraph-one">
             <h1 dangerouslySetInnerHTML={{ __html: paragraphOne }} />
           </div>
-          <div className="container__right-paragraph-two">
+          <div className="container__right-paragraph-two desktop-show mobile-hide">
             <h2 dangerouslySetInnerHTML={{ __html: paragraphTwo }} />
           </div>
         </div>
