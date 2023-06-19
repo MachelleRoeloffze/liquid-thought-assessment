@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import Lottie from 'lottie-react-web';
-import '../assets/styles/components/card.scss';
-import glassesAnimation from '../assets/lottie/glasses.json';
-import onesieAnimation from '../assets/lottie/onesie.json';
-import pantsAnimation from '../assets/lottie/pants.json';
-import shoeAnimation from '../assets/lottie/shoe.json';
-import shortsAnimation from '../assets/lottie/shorts.json';
+import React, { useState, useEffect } from "react";
+import Lottie from "lottie-react-web";
+import glassesAnimation from "../assets/lottie/glasses.json";
+import onesieAnimation from "../assets/lottie/onesie.json";
+import pantsAnimation from "../assets/lottie/pants.json";
+import shoeAnimation from "../assets/lottie/shoe.json";
+import shortsAnimation from "../assets/lottie/shorts.json";
 
 const animations = [
-  { name: 'glasses', animation: glassesAnimation },
-  { name: 'onesie', animation: onesieAnimation },
-  { name: 'pants', animation: pantsAnimation },
-  { name: 'shoe', animation: shoeAnimation },
-  { name: 'shorts', animation: shortsAnimation },
+  { name: "glasses", animation: glassesAnimation },
+  { name: "onesie", animation: onesieAnimation },
+  { name: "pants", animation: pantsAnimation },
+  { name: "shoe", animation: shoeAnimation },
+  { name: "shorts", animation: shortsAnimation },
 ];
+
+const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
 
 const shuffleArray = (array) => {
   const newArray = [...array];
@@ -25,38 +26,43 @@ const shuffleArray = (array) => {
 };
 
 const generateInitialCards = () => {
-  const cards = animations.flatMap((animation, index) => [
-    {
-      id: `card${index + 1}a`,
-      animation: animation.animation,
-      isFlipped: false,
-      isMatched: false,
-    },
-    {
-      id: `card${index + 1}b`,
-      animation: animation.animation,
-      isFlipped: false,
-      isMatched: false,
-    },
-  ]);
+  const cards = animations.flatMap((animation, index) => {
+    const letterIndex = Math.floor(index / 2);
+    const letter = letters[letterIndex];
+
+    return [
+      {
+        id: `card${index + 1}a`,
+        letter: letter,
+        animation: animation.animation,
+        isFlipped: false,
+        isMatched: false,
+      },
+      {
+        id: `card${index + 1}b`,
+        letter: letter,
+        animation: animation.animation,
+        isFlipped: false,
+        isMatched: false,
+      },
+    ];
+  });
+
   return shuffleArray(cards);
 };
+
 
 const Game = () => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
   const [matchedCards, setMatchedCards] = useState([]);
   const [moves, setMoves] = useState(0);
+  const [roundsPlayed, setRoundsPlayed] = useState(0);
+  const [accuracy, setAccuracy] = useState(0);
 
   useEffect(() => {
     setCards(generateInitialCards());
   }, []);
-
-  useEffect(() => {
-    if (matchedCards.length === cards.length) {
-      console.log(`Congratulations! You completed the game in ${moves} moves.`);
-    }
-  }, [matchedCards, moves]);
 
   const handleCardClick = (cardId) => {
     const clickedCardIndex = cards.findIndex((card) => card.id === cardId);
@@ -88,6 +94,7 @@ const Game = () => {
             : card
         );
         setMatchedCards((prev) => [...prev, card1, card2]);
+        setFlippedCards([]);
       } else {
         handleUnmatchedCards(card1, card2);
       }
@@ -99,11 +106,13 @@ const Game = () => {
 
   const handleUnmatchedCards = (card1, card2) => {
     setTimeout(() => {
-      const updatedCards = cards.map((card) =>
-        card.id === card1 || card.id === card2
-          ? { ...card, isFlipped: false }
-          : card
-      );
+      const updatedCards = cards.map((card) => {
+        if (card.id === card1 || card.id === card2) {
+          return { ...card, isFlipped: false };
+        } else {
+          return card;
+        }
+      });
       setCards(updatedCards);
       setFlippedCards([]);
     }, 1000);
@@ -130,76 +139,46 @@ const Game = () => {
     }
   }, [flippedCards]);
 
-  const renderCards = () => {
-    const firstRow = cards.slice(0, 5);
-    const secondRow = cards.slice(5, 10);
+  useEffect(() => {
+    if (matchedCards.length === cards.length && moves > 0) {
+      const newRoundsPlayed = roundsPlayed + 1;
+      const newAccuracy = (matchedCards.length / moves) * 100;
+      setRoundsPlayed(newRoundsPlayed);
+      setAccuracy(newAccuracy);
+    }
+  }, [matchedCards, moves]);
 
-    return (
-      <div className='card-container'>
-        <div className='card-row'>
-          {firstRow.map((card) => (
-            <div key={card.id} className='game-card'>
-              <div
-                className={`game-card-inner ${
-                  card.isFlipped ? 'flipped' : ''
-                } ${card.isMatched ? 'matched' : ''}`}
-                onClick={() => handleCardClick(card.id)}
-              >
-                {card.isFlipped || card.isMatched ? (
-                  <Lottie
-                    options={{
-                      loop: false,
-                      autoplay: card.isMatched,
-                      animationData: card.animation,
-                    }}
-                  />
-                ) : (
-                  <>
-                    <div className='card-front'></div>
-                    <div className='card-back'></div>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
+  const renderCards = () => {
+    return cards.map((card) => (
+      <div
+        key={card.id}
+        className={`game-card ${
+          card.isFlipped ? "flipped" : ""
+        } ${card.isMatched ? "matched" : ""}`}
+        onClick={() => handleCardClick(card.id)}
+      >
+        <div className="card-back">
+          {card.isFlipped || card.isMatched ? (
+            <Lottie
+              options={{
+                loop: false,
+                autoplay: card.isMatched,
+                animationData: card.animation,
+              }}
+            />
+          ) : null}
         </div>
-        <div className='card-row'>
-          {secondRow.map((card) => (
-            <div key={card.id} className='game-card'>
-              <div
-                className={`game-card-inner ${
-                  card.isFlipped ? 'flipped' : ''
-                } ${card.isMatched ? 'matched' : ''}`}
-                onClick={() => handleCardClick(card.id)}
-              >
-                {card.isFlipped || card.isMatched ? (
-                  <Lottie
-                    options={{
-                      loop: false,
-                      autoplay: card.isMatched,
-                      animationData: card.animation,
-                    }}
-                  />
-                ) : (
-                  <>
-                    <div className='card-front'></div>
-                    <div className='card-back'></div>
-                  </>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+        <div className="card-front"></div>
       </div>
-    );
+    ));
   };
 
   return (
-    <div className='legend'>
-      <div>
-        {renderCards()}
-        <span>Moves: {moves}</span>
-      </div>
+    <div className="legend">
+      <div className="card-container">{renderCards()}</div>
+      <p>Moves: {moves}</p>
+      <p>Rounds Played: {roundsPlayed}</p>
+      <p>Accuracy: {accuracy.toFixed(2)}%</p>
     </div>
   );
 };

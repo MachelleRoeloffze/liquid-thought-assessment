@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../assets/styles/ui/button.scss';
+
 
 const Button = ({ text, onClick, color, size, outline }) => {
   const buttonClass = `button ${

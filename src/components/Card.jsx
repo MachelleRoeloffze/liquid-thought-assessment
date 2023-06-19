@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import '../assets/styles/components/card.scss';
+import PropTypes from "prop-types";
+
 
 const GameCard = ({ id, isFlipped, isMatched, onClick }) => {
   const handleClick = () => {
@@ -9,20 +9,18 @@ const GameCard = ({ id, isFlipped, isMatched, onClick }) => {
   };
 
   return (
-    <div className='game-card'>
-      <div
-        className={`game-card-inner ${isFlipped ? 'flipped' : ''} ${
-          isMatched ? 'matched' : ''
-        }`}
-        onClick={handleClick}
-      >
-        {isFlipped || isMatched ? (
-          <>
-            <div className='card-front'></div>
-            <div className='card-back'></div>
-          </>
-        ) : null}
-      </div>
+    <div
+      className={`game-card ${isFlipped ? "flipped" : ""} ${
+        isMatched ? "matched" : ""
+      }`}
+      onClick={handleClick}
+    >
+      {isFlipped || isMatched ? (
+        <>
+          <div className="card-front"></div>
+          <div className="card-back"></div>
+        </>
+      ) : null}
     </div>
   );
 };

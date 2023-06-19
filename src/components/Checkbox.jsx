@@ -1,5 +1,5 @@
 import React from 'react';
-import '../assets/styles/ui/checkbox.scss';
+
 
 const CustomCheckbox = ({ isChecked, onChange }) => {
   return (

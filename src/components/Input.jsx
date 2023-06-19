@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import "../assets/styles/ui/input.scss"
 
 const Input = ({ type, value, placeholder, onChange, error }) => {
   return (
@@ -15,6 +14,13 @@ const Input = ({ type, value, placeholder, onChange, error }) => {
       {error && <p className="input-error-message">{error}</p>}
     </div>
   );
+};
+
+Input.defaultProps = {
+  value: '',
+  placeholder: '',
+  onChange: () => {},
+  error: '',
 };
 
 Input.propTypes = {

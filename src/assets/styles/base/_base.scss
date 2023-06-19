@@ -1,0 +1,132 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-image: url("../src/assets/images/img-bg-desktop.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin: 0 auto;
+  padding: 20px 10px;
+  border: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.desktop {
+  &-show {
+    display: block;
+  }
+  &-hide {
+    display: none;
+  }
+}
+
+.desktop {
+  &-show {
+    display: block;
+  }
+  &-hide {
+    display: none;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+
+  &__left {
+    flex: 1;
+  }
+
+  &__right {
+    flex: 1;
+    margin-left: 40px;
+
+    &-text {
+      font-family: "Nanum Pen Script", cursive;
+      font-size: 24px;
+      width: 49%;
+      margin: 66px 34px 0 auto;
+      text-align: right;
+    }
+
+    &-paragraph-one {
+      margin-bottom: 20px;
+    }
+
+    &-image-one {
+      margin-top: -39px;
+    }
+    &-image-two {
+      text-align: right;
+      margin: 63px 26px 0 0;
+
+      img {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-image: url("../src/assets/images/img-bg-mobile.svg");
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Added to center align content */
+
+    &__left {
+      flex: 1;
+      order: 2;
+      display: flex;
+      justify-content: center;
+    }
+
+    &__right {
+      flex: 1;
+      margin-left: 0;
+      order: 1;
+      display: flex;
+      flex-direction: column;
+
+      &-paragraph-one {
+        padding-left: 30px;
+        width: 62%;
+        order: 3; /* Updated order property */
+      }
+
+      &-paragraph-two {
+        padding-left: 30px;
+        width: 55%;
+        margin-bottom: 30px;
+        order: 4; /* Updated order property */
+      }
+
+      &-text {
+        width: 100%;
+        margin: 0;
+        text-align: left;
+      }
+    }
+  }
+
+  .card-container {
+    order: 5; /* Added order property */
+  }
+}
+
+
+
+

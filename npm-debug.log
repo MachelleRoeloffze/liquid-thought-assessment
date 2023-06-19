@@ -3,7 +3,7 @@
 1 verbose cli   '/usr/local/bin/node',
 1 verbose cli   '/usr/local/bin/npm',
 1 verbose cli   'install',
-1 verbose cli   'classnames'
+1 verbose cli   'normalize.css'
 1 verbose cli ]
 2 info using npm@3.10.10
 3 info using node@v18.16.0
@@ -15,7 +15,7 @@
 7 verbose stack     at FSReqCallback.oncomplete (node:fs:209:5)
 8 verbose cwd /Users/setup/Desktop/assessment-liquid-thought/liquid-thought-assessment
 9 error Darwin 21.6.0
-10 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "classnames"
+10 error argv "/usr/local/bin/node" "/usr/local/bin/npm" "install" "normalize.css"
 11 error node v18.16.0
 12 error npm  v3.10.10
 13 error cb.apply is not a function
