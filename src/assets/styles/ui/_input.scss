@@ -6,20 +6,21 @@
   border-radius: 12px;
   background-color: #efeeeb;
   border: 0;
+}
 
-  &__text,
-  &__email {
-    padding-left: 20px;
-    outline: none;
-  }
+.input__text,
+.input__email {
+  padding-left: 20px;
+  outline: none;
+}
 
-  &::placeholder {
-    color: #000000;
-  }
+.input::placeholder {
+  color: #000000;
+}
 
-  @media (max-width: 768px) {
-    input {
-      width: 100%;
-    }
+@media (max-width: 768px) {
+  .input {
+    width: 100%;
+    max-width: 357px;
   }
 }

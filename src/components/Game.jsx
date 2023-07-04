@@ -1,21 +1,21 @@
-import React, { useState, useEffect } from "react";
-import Lottie from "lottie-react-web";
-import glassesAnimation from "../assets/lottie/glasses.json";
-import onesieAnimation from "../assets/lottie/onesie.json";
-import pantsAnimation from "../assets/lottie/pants.json";
-import shoeAnimation from "../assets/lottie/shoe.json";
-import shortsAnimation from "../assets/lottie/shorts.json";
-import Button from "./Button";
+import React, { useState, useEffect } from 'react';
+import Lottie from 'lottie-react-web';
+import glassesAnimation from '../assets/lottie/glasses.json';
+import onesieAnimation from '../assets/lottie/onesie.json';
+import pantsAnimation from '../assets/lottie/pants.json';
+import shoeAnimation from '../assets/lottie/shoe.json';
+import shortsAnimation from '../assets/lottie/shorts.json';
+import Button from './Button';
 
 const animations = [
-  { name: "glasses", animation: glassesAnimation },
-  { name: "onesie", animation: onesieAnimation },
-  { name: "pants", animation: pantsAnimation },
-  { name: "shoe", animation: shoeAnimation },
-  { name: "shorts", animation: shortsAnimation },
+  { name: 'glasses', animation: glassesAnimation },
+  { name: 'onesie', animation: onesieAnimation },
+  { name: 'pants', animation: pantsAnimation },
+  { name: 'shoe', animation: shoeAnimation },
+  { name: 'shorts', animation: shortsAnimation },
 ];
 
-const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"];
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
 
 const shuffleArray = (array) => {
   const newArray = [...array];
@@ -58,7 +58,6 @@ const Game = () => {
   const [matchedCards, setMatchedCards] = useState([]);
   const [moves, setMoves] = useState(0);
   const [roundsPlayed, setRoundsPlayed] = useState(0);
-  const [accuracy, setAccuracy] = useState(0);
   const [isGameComplete, setIsGameComplete] = useState(false);
 
   useEffect(() => {
@@ -143,9 +142,7 @@ const Game = () => {
   useEffect(() => {
     if (matchedCards.length === cards.length && moves > 0) {
       const newRoundsPlayed = roundsPlayed + 1;
-      const newAccuracy = (matchedCards.length / moves) * 100;
       setRoundsPlayed(newRoundsPlayed);
-      setAccuracy(newAccuracy);
       setIsGameComplete(true);
     }
   }, [matchedCards, moves]);
@@ -162,12 +159,12 @@ const Game = () => {
     return cards.map((card) => (
       <div
         key={card.id}
-        className={`game-card ${card.isFlipped ? "flipped" : ""} ${
-          card.isMatched ? "matched" : ""
+        className={`game-card ${card.isFlipped ? 'flipped' : ''} ${
+          card.isMatched ? 'matched' : ''
         }`}
         onClick={() => handleCardClick(card.id)}
       >
-        <div className="card-back">
+        <div className='card-back'>
           {card.isFlipped || card.isMatched ? (
             <Lottie
               options={{
@@ -178,24 +175,23 @@ const Game = () => {
             />
           ) : null}
         </div>
-        <div className="card-front"></div>
+        <div className='card-front'></div>
       </div>
     ));
   };
 
   return (
     <div>
-      <div className="card-container">{renderCards()}</div>
-      <div className="legend">
+      <div className='card-container'>{renderCards()}</div>
+      <div className='legend'>
         <p>Moves: {moves}</p>
         <p>Rounds Played: {roundsPlayed}</p>
-        <p>Accuracy: {accuracy.toFixed(2)}%</p>
         {isGameComplete && (
           <Button
-            type="text"
-            text="Reset"
-            color="primary"
-            size="medium"
+            type='text'
+            text='Reset'
+            color='primary'
+            size='medium'
             onClick={resetGame}
           />
         )}

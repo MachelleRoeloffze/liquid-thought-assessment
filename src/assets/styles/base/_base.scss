@@ -1,6 +1,6 @@
 body {
-  font-family: "Poppins", sans-serif;
-  background-image: url("../src/assets/images/img-bg-desktop.jpg");
+  font-family: 'Poppins', sans-serif;
+  background-image: url('../src/assets/images/img-bg-desktop.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   margin: 0 auto;
@@ -42,7 +42,7 @@ body {
     margin-left: 40px;
 
     &-text {
-      font-family: "Nanum Pen Script", cursive;
+      font-family: 'Nanum Pen Script', cursive;
       font-size: 24px;
       width: 49%;
       margin: 66px 34px 0 auto;
@@ -59,7 +59,7 @@ body {
 
     &-image-one {
       margin-top: -43px;
-      background-image: url("/src/assets/images/img-top-dotted-line.svg");
+      background-image: url('/src/assets/images/img-top-dotted-line.svg');
       background-repeat: no-repeat;
       width: 100%;
       height: 24%;
@@ -79,7 +79,7 @@ body {
 
 @media (max-width: 1024px) {
   body {
-    background-image: url("../src/assets/images/img-bg-mobile.svg");
+    background-image: url('../src/assets/images/img-bg-mobile.svg');
   }
 
   .container {
@@ -100,12 +100,13 @@ body {
       flex-direction: column;
 
       &-image-one {
-        background-image: url("/src/assets/images/img-top-dotted-line-mobile.svg");
+        background-image: url('/src/assets/images/img-top-dotted-line-mobile.svg');
         background-repeat: no-repeat;
+        background-position: right;
         width: 100%;
         height: 50px;
         order: 3;
-        margin-left:20px;
+        margin-left: auto;
       }
 
       &-image-two {
@@ -115,19 +116,20 @@ body {
       }
 
       &-paragraph-one {
-        padding-left: 30px;
-        width: 62%;
+        padding-left: 0;
+        width: 100%;
         order: 1;
       }
 
       &-paragraph-two-mobile {
         display: block;
         order: 4;
+        margin: 20px 0;
       }
 
       &-paragraph-two {
-        padding: 30px 0 0 30px;
-        width: 55%;
+        padding: 30px 0 0 0;
+        width: 100%;
         margin-bottom: 30px;
         order: 5;
       }
