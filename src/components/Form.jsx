@@ -16,6 +16,8 @@ const Form = () => {
   const paragraphTwoText = "Drop your deets and we’ll give you a buzz.";
   const checkbox1LabelText = "Count me in as a seller";
   const checkbox2LabelText = "Count me in as a buyer";
+  const thankyouText = "Thank you!";
+  const inboxSoonText = "We’ll see you in your inbox soon!"
 
   const validateName = () => {
     if (name.trim() === "") {
@@ -62,34 +64,16 @@ const Form = () => {
     }
   };
 
-  const handleClose = () => {
-    setSubmitted(false);
-    setName("");
-    setEmail("");
-    setIsChecked1(false);
-    setIsChecked2(false);
-    setNameError("");
-    setEmailError("");
-  };
-  
-
   return (
     <div className="form">
       {submitted ? (
         <div className="form__content">
           <div className="form__thank-you">
-          <Button
-            onClick={handleClose}
-            color="tertiary"
-            size="xsmall"
-            outline={true}
-          />
             <p>
-              <strong className="bold">Thank you!</strong>
+              <strong className="bold">{thankyouText}</strong>
             </p>
-            <p>We’ll see you in your inbox soon!</p>
+            <p>{inboxSoonText}</p>
           </div>
-        
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate>

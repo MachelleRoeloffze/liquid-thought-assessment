@@ -4,7 +4,6 @@
   grid-gap: 5px;
   justify-content: center;
   align-items: center;
-  // background-image: url("/src/assets/images/GAME-BG.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -22,11 +21,6 @@
 
   &.flipped .card-back {
     transform: rotateY(0);
-  }
-
-  &.matched .card-front,
-  &.matched .card-back {
-    visibility: hidden;
   }
 
   &.flipped .card-front {
@@ -73,6 +67,7 @@
 
 .legend {
   text-align: center;
+  padding: 10px 0 10px 0;
 }
 
 .legend p {

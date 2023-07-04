@@ -5,6 +5,7 @@ import onesieAnimation from "../assets/lottie/onesie.json";
 import pantsAnimation from "../assets/lottie/pants.json";
 import shoeAnimation from "../assets/lottie/shoe.json";
 import shortsAnimation from "../assets/lottie/shorts.json";
+import Button from "./Button";
 
 const animations = [
   { name: "glasses", animation: glassesAnimation },
@@ -51,7 +52,6 @@ const generateInitialCards = () => {
   return shuffleArray(cards);
 };
 
-
 const Game = () => {
   const [cards, setCards] = useState([]);
   const [flippedCards, setFlippedCards] = useState([]);
@@ -59,6 +59,7 @@ const Game = () => {
   const [moves, setMoves] = useState(0);
   const [roundsPlayed, setRoundsPlayed] = useState(0);
   const [accuracy, setAccuracy] = useState(0);
+  const [isGameComplete, setIsGameComplete] = useState(false);
 
   useEffect(() => {
     setCards(generateInitialCards());
@@ -145,16 +146,25 @@ const Game = () => {
       const newAccuracy = (matchedCards.length / moves) * 100;
       setRoundsPlayed(newRoundsPlayed);
       setAccuracy(newAccuracy);
+      setIsGameComplete(true);
     }
   }, [matchedCards, moves]);
+
+  const resetGame = () => {
+    setCards(generateInitialCards());
+    setFlippedCards([]);
+    setMatchedCards([]);
+    setMoves(0);
+    setIsGameComplete(false);
+  };
 
   const renderCards = () => {
     return cards.map((card) => (
       <div
         key={card.id}
-        className={`game-card ${
-          card.isFlipped ? "flipped" : ""
-        } ${card.isMatched ? "matched" : ""}`}
+        className={`game-card ${card.isFlipped ? "flipped" : ""} ${
+          card.isMatched ? "matched" : ""
+        }`}
         onClick={() => handleCardClick(card.id)}
       >
         <div className="card-back">
@@ -174,11 +184,22 @@ const Game = () => {
   };
 
   return (
-    <div className="legend">
+    <div>
       <div className="card-container">{renderCards()}</div>
-      <p>Moves: {moves}</p>
-      <p>Rounds Played: {roundsPlayed}</p>
-      <p>Accuracy: {accuracy.toFixed(2)}%</p>
+      <div className="legend">
+        <p>Moves: {moves}</p>
+        <p>Rounds Played: {roundsPlayed}</p>
+        <p>Accuracy: {accuracy.toFixed(2)}%</p>
+        {isGameComplete && (
+          <Button
+            type="text"
+            text="Reset"
+            color="primary"
+            size="medium"
+            onClick={resetGame}
+          />
+        )}
+      </div>
     </div>
   );
 };
